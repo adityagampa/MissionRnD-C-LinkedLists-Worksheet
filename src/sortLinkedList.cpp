@@ -13,11 +13,30 @@ NOTES: Without using extra array or linked list.
 
 #include <stdio.h>
 
-struct node {
+struct node
+{
 	int num;
 	struct node *next;
 };
 
-struct node * sortLinkedList(struct node *head) {
-	return NULL;
+struct node * sortLinkedList(struct node *head)
+{
+	struct node *i = head, *j = head;
+	int data;
+	while (i)
+	{
+		j = head;
+		while (j->next)
+		{
+			if (j->num > j->next->num)
+			{
+				data = j->next->num;
+				j->next->num = j->num;
+				j->num = data;
+			}
+			j = j->next;
+		}
+		i = i->next;
+	}
+	return head;
 }
