@@ -12,12 +12,42 @@ NOTES:
 */
 
 #include <stdio.h>
-
-struct node {
+#include <stdlib.h>
+struct node
+{
 	int num;
 	struct node *next;
 };
 
-struct node * removeEveryKthNode(struct node *head, int K) {
-	return NULL;
+struct node * removeEveryKthNode(struct node *head, int k)
+{
+	struct node *temp = head, *prev = head;
+	int i = 0;
+	if (k <= 1)
+	{
+		while (temp)
+		{
+			prev = temp->next;
+			free(temp);
+			temp = prev;
+		}
+		return NULL;
+	}
+	while (temp && temp->next)
+	{
+		for (i = 0; i<k - 1; i++)
+		{
+			if (temp == NULL)
+				return head;
+			prev = temp;
+			temp = temp->next;
+		}
+		if (temp == NULL)
+			return head;
+		prev->next = temp->next;
+		free(temp);
+		temp = prev;
+		temp = temp->next;
+	}
+	return head;
 }
